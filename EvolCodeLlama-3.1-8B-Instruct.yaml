@@ -28,7 +28,7 @@ lora_target_modules:
 lora_target_linear: true
 lora_fan_in_fan_out:
 
-wandb_project: axolotl
+wandb_project: axolotl-llama-3-8B
 wandb_entity:
 wandb_watch:
 wandb_run_id:
