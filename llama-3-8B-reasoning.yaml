@@ -192,3 +192,4 @@ weight_decay: 0.1
 fsdp:
 fsdp_config:
 special_tokens:
+  pad_token: "<|end_of_text|>"
