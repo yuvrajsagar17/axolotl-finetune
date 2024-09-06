@@ -1,7 +1,7 @@
 base_model: meta-llama/Meta-Llama-3-8B-Instruct
 model_type: LlamaForCausalLM
 tokenizer_type: AutoTokenizer
-is_mistral_derived_model: true
+is_llama_derived_model: true
 tokenizer_use_fast: true
 hub_model_id: Llama-3-8B-reasoning-50K
 
@@ -15,7 +15,7 @@ datasets:
 
 dataset_prepared_path: last_run_prepared
 val_set_size: 0.02
-output_dir: ./outputs/mistral-7b-reasoning
+output_dir: ./outputs/llama-3-8b-reasoning
 
 sequence_len: 2048
 sample_packing: true
