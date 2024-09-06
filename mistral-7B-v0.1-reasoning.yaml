@@ -12,12 +12,28 @@ hub_model_id: Mistral-7B-v0.1-reasoning-50K
 datasets:
   - path: Syed-Hasan-8503/reasoning_50K
     type: alpaca
+      # The below are defaults. only set what's needed if you use a different column name.
+      system_prompt: ""
+      system_format: "{system}"
+      field_system: system
+      field_instruction: instruction
+      field_input: input
+      field_output: output
+
+      # Customizable to be single line or multi-line
+      # Use {instruction}/{input} as key to be replaced
+      # 'format' can include {input}
+      format: |-
+        User: {instruction} {input}
+        Assistant:
+      # 'no_input_format' cannot include {input}
+      no_input_format: "{instruction} "
 
 dataset_prepared_path: last_run_prepared
 val_set_size: 0.02
 output_dir: ./outputs/mistral-7b-reasoning
 
-sequence_len: 4096
+sequence_len: 2048
 sample_packing: true
 pad_to_sequence_len: true
 
@@ -129,7 +145,7 @@ eval_steps: 0.01
 save_strategy: epoch
 save_steps:
 debug:
-deepspeed: deepspeed_configs/zero3.json
+deepspeed: deepspeed_configs/zero2.json
 weight_decay: 0.1
 fsdp:
 fsdp_config:
