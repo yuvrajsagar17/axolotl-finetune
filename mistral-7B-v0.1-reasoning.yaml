@@ -13,11 +13,11 @@ datasets:
   - path: Syed-Hasan-8503/reasoning_50K
     type: alpaca
 
-dataset_prepared_path: data/last_run_prepared
+dataset_prepared_path: last_run_prepared
 val_set_size: 0.02
 output_dir: ./outputs/mistral-7b-reasoning
 
-sequence_len: 2048
+sequence_len: 4096
 sample_packing: true
 pad_to_sequence_len: true
 
@@ -103,12 +103,12 @@ wandb_watch:
 wandb_name:
 wandb_log_model:
 
-gradient_accumulation_steps: 8
-micro_batch_size: 1
+gradient_accumulation_steps: 4
+micro_batch_size: 2
 num_epochs: 3
-optimizer: adamw_8bit
+optimizer: paged_adamw_32bit
 lr_scheduler: cosine
-learning_rate: 1e-5
+learning_rate: 0.0002
 
 train_on_inputs: false
 group_by_length: false
@@ -124,14 +124,12 @@ logging_steps: 1
 xformers_attention:
 flash_attention: true
 
-warmup_steps: 10
-evals_per_epoch: 2
-eval_table_size:
-eval_max_new_tokens: 128
-saves_per_epoch: 4
-save_total_limit: 2
+warmup_steps: 100
+eval_steps: 0.01
+save_strategy: epoch
+save_steps:
 debug:
-deepspeed: deepspeed_configs/zero2.json
+deepspeed: deepspeed_configs/zero3.json
 weight_decay: 0.1
 fsdp:
 fsdp_config:
