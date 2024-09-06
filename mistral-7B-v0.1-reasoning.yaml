@@ -1,0 +1,140 @@
+base_model: mistralai/Mistral-7B-v0.1
+model_type: MistralForCausalLM
+tokenizer_type: AutoTokenizer
+is_mistral_derived_model: true
+tokenizer_use_fast: true
+hub_model_id: Mistral-7B-v0.1-reasoning-50K
+
+# load_in_8bit: true
+# load_in_4bit: false
+# strict: false
+
+datasets:
+  - path: Syed-Hasan-8503/reasoning_50K
+    type: alpaca
+
+chat_template: chatml
+dataset_prepared_path: data/mistral-7b-reasoning
+val_set_size: 0.02
+output_dir: ./outputs/mistral-7b-reasoning
+
+sequence_len: 2048
+sample_packing: true
+pad_to_sequence_len: true
+
+# Model Layers for Mistral:
+unfrozen_parameters:
+  - ^lm_head.weight$
+  - ^model.embed_tokens.weight$
+  # mlp.down_proj layers
+  - model.layers.19.mlp.down_proj
+  - model.layers.20.mlp.down_proj
+  - model.layers.18.mlp.down_proj
+  - model.layers.21.mlp.down_proj
+  - model.layers.29.mlp.down_proj
+  - model.layers.1.mlp.down_proj
+  - model.layers.28.mlp.down_proj
+  - model.layers.22.mlp.down_proj
+  # mlp.gate_proj layers
+  - model.layers.31.mlp.gate_proj
+  - model.layers.30.mlp.gate_proj
+  - model.layers.4.mlp.gate_proj
+  - model.layers.3.mlp.gate_proj
+  - model.layers.28.mlp.gate_proj
+  - model.layers.29.mlp.gate_proj
+  - model.layers.6.mlp.gate_proj
+  - model.layers.27.mlp.gate_proj
+  # mlp.up_proj layers
+  - model.layers.6.mlp.up_proj
+  - model.layers.4.mlp.up_proj
+  - model.layers.5.mlp.up_proj
+  - model.layers.27.mlp.up_proj
+  - model.layers.26.mlp.up_proj
+  - model.layers.25.mlp.up_proj
+  - model.layers.17.mlp.up_proj
+  - model.layers.24.mlp.up_proj
+  # self_attn.k_proj layers
+  - model.layers.27.self_attn.k_proj
+  - model.layers.24.self_attn.k_proj
+  - model.layers.25.self_attn.k_proj
+  - model.layers.22.self_attn.k_proj
+  - model.layers.26.self_attn.k_proj
+  - model.layers.29.self_attn.k_proj
+  - model.layers.23.self_attn.k_proj
+  - model.layers.28.self_attn.k_proj
+  # self_attn.o_proj layers
+  - model.layers.12.self_attn.o_proj
+  - model.layers.9.self_attn.o_proj
+  - model.layers.14.self_attn.o_proj
+  - model.layers.0.self_attn.o_proj
+  - model.layers.8.self_attn.o_proj
+  - model.layers.6.self_attn.o_proj
+  - model.layers.10.self_attn.o_proj
+  - model.layers.11.self_attn.o_proj
+  # self_attn.q_proj layers
+  - model.layers.0.self_attn.q_proj
+  - model.layers.1.self_attn.q_proj
+  - model.layers.15.self_attn.q_proj
+  - model.layers.12.self_attn.q_proj
+  - model.layers.11.self_attn.q_proj
+  - model.layers.14.self_attn.q_proj
+  - model.layers.9.self_attn.q_proj
+  - model.layers.16.self_attn.q_proj
+  # self_attn.v_proj layers
+  - model.layers.19.self_attn.v_proj
+  - model.layers.24.self_attn.v_proj
+  - model.layers.18.self_attn.v_proj
+  - model.layers.5.self_attn.v_proj
+  - model.layers.3.self_attn.v_proj
+  - model.layers.16.self_attn.v_proj
+  - model.layers.23.self_attn.v_proj
+  - model.layers.27.self_attn.v_proj
+
+# adapter: lora
+# lora_model_dir:
+# lora_r: 32
+# lora_alpha: 16
+# lora_dropout: 0.05
+# lora_target_linear: true
+# lora_fan_in_fan_out:
+
+wandb_project: mistal-7B-v0.1
+wandb_entity:
+wandb_watch:
+wandb_name:
+wandb_log_model:
+
+gradient_accumulation_steps: 8
+micro_batch_size: 1
+num_epochs: 3
+optimizer: adamw_8bit
+lr_scheduler: cosine
+learning_rate: 1e-5
+
+train_on_inputs: false
+group_by_length: false
+bf16: auto
+fp16:
+tf32: false
+
+gradient_checkpointing: true
+early_stopping_patience:
+resume_from_checkpoint:
+local_rank:
+logging_steps: 1
+xformers_attention:
+flash_attention: true
+
+warmup_steps: 10
+evals_per_epoch: 2
+eval_table_size:
+eval_max_new_tokens: 128
+saves_per_epoch: 4
+save_total_limit: 2
+debug:
+deepspeed: deepspeed_configs/zero3.json
+weight_decay: 0.1
+fsdp:
+fsdp_config:
+special_tokens:
+  pad_token: null
