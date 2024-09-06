@@ -13,8 +13,7 @@ datasets:
   - path: Syed-Hasan-8503/reasoning_50K
     type: alpaca
 
-chat_template: chatml
-dataset_prepared_path: data/mistral-7b-reasoning
+dataset_prepared_path: data/last_run_prepared
 val_set_size: 0.02
 output_dir: ./outputs/mistral-7b-reasoning
 
@@ -132,7 +131,7 @@ eval_max_new_tokens: 128
 saves_per_epoch: 4
 save_total_limit: 2
 debug:
-deepspeed: deepspeed_configs/zero3.json
+deepspeed: deepspeed_configs/zero2.json
 weight_decay: 0.1
 fsdp:
 fsdp_config:
