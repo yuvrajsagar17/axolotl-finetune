@@ -12,7 +12,7 @@ hub_model_id: Mistral-7B-v0.1-GreeceRome
 
 datasets:
   - path: wmmarcellino/mistral-7b-v0.1-GreeceRome
-  type: sharegpt
+  type: chat
 
 dataset_prepared_path: last_run_prepared
 val_set_size: 0.02
@@ -105,8 +105,8 @@ wandb_name:
 wandb_log_model:
 
 gradient_accumulation_steps: 4
-micro_batch_size: 4
-num_epochs: 2
+micro_batch_size: 2
+num_epochs: 3
 optimizer: paged_adamw_32bit
 lr_scheduler: cosine
 learning_rate: 0.0002
@@ -130,7 +130,7 @@ eval_steps: 0.01
 save_strategy: epoch
 save_steps:
 debug:
-deepspeed: deepspeed_configs/zero2.json
+deepspeed: deepspeed_configs/zero3.json
 weight_decay: 0.1
 fsdp:
 fsdp_config:
