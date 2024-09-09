@@ -12,7 +12,7 @@ hub_model_id: Mistral-7B-v0.1-GreeceRome
 
 datasets:
   - path: wmmarcellino/mistral-7b-v0.1-GreeceRome
-  type: alpaca
+  type: sharegpt
 
 dataset_prepared_path: last_run_prepared
 val_set_size: 0.02
