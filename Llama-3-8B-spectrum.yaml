@@ -1,0 +1,72 @@
+base_model: meta-llama/Meta-Llama-3-8B-Instruct
+model_type: LlamaForCausalLM
+tokenizer_type: AutoTokenizer
+is_llama_derived_model: true
+tokenizer_use_fast: true
+hub_model_id: Llama-3-8B-spectrum-25
+
+# load_in_8bit: true
+# load_in_4bit: false
+# strict: false
+
+datasets:
+  - path: deepanshdj/llama3_dataset_1k
+    type: alpaca
+
+dataset_prepared_path: last_run_prepared
+val_set_size: 0.02
+output_dir: ./outputs/llama-3-8b-spectrum-25
+
+sequence_len: 2048
+sample_packing: true
+pad_to_sequence_len: true
+
+# Model Layers for Llama-3-8B-Instruct (Spectrum with snr values (25%)):
+unfrozen_parameters:
+
+# adapter: lora
+# lora_model_dir:
+# lora_r: 32
+# lora_alpha: 16
+# lora_dropout: 0.05
+# lora_target_linear: true
+# lora_fan_in_fan_out:
+
+wandb_project: llama-3-8B-spectrum
+wandb_entity:
+wandb_watch:
+wandb_name:
+wandb_log_model:
+
+gradient_accumulation_steps: 4
+micro_batch_size: 4
+num_epochs: 2
+optimizer: paged_adamw_32bit
+lr_scheduler: cosine
+learning_rate: 0.0002
+
+train_on_inputs: false
+group_by_length: false
+bf16: auto
+fp16:
+tf32: false
+
+gradient_checkpointing: true
+early_stopping_patience:
+resume_from_checkpoint:
+local_rank:
+logging_steps: 1
+xformers_attention:
+flash_attention: true
+
+warmup_steps: 100
+eval_steps: 0.01
+save_strategy: epoch
+save_steps:
+debug:
+deepspeed: deepspeed_configs/zero2.json
+weight_decay: 0.1
+fsdp:
+fsdp_config:
+special_tokens:
+  pad_token: "<|end_of_text|>"
