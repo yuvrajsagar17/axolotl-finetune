@@ -10,7 +10,7 @@ hub_model_id: Llama-3-8B-spectrum-25
 # strict: false
 
 datasets:
-  - path: deepanshdj/llama3_dataset_1k
+  - path: yuvraj17/finetune_alpaca_1K
     type: alpaca
 
 dataset_prepared_path: last_run_prepared
