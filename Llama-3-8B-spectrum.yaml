@@ -18,7 +18,8 @@ val_set_size: 0.02
 output_dir: ./outputs/llama-3-8b-spectrum-25
 
 sequence_len: 2048
-sample_packing: true
+sample_packing: false
+eval_sample_packing: false
 pad_to_sequence_len: true
 
 # Model Layers for Llama-3-8B-Instruct (Spectrum with snr values (25%)):
