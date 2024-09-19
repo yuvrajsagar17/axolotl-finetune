@@ -1,4 +1,4 @@
-﻿# meta-llama/Meta-Llama-3.1-8B-Instruct Qlora finetune using `Axolotl`
+﻿# Meta-Llama-3.1-8B-Instruct Qlora finetune using `Axolotl`
 
 For the reference of `EvolCodeLlama-3.1-Instruct.yaml` file, visit this excellent [blog post](https://mlabonne.github.io/blog/posts/A_Beginners_Guide_to_LLM_Finetuning.html) by `mlabonne`.
 
