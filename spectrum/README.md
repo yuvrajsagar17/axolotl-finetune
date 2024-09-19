@@ -14,7 +14,8 @@ In the paper, authors have selected two values for **t**, either _25_ or _50_ to
 
 For in-depth details how Spectrum works, [this](https://huggingface.co/blog/anakin87/spectrum) community article on Spectrum can be very helpful.
 
-![Spectrum Working Image](spectrum/spectrum.png)
+![Spectrum Working Image](spectrum.png)
+> Refrence: [Huggingface Community Blog](https://huggingface.co/blog/anakin87/spectrum) 
 
 ## Getting Started
 
@@ -64,9 +65,14 @@ pip install -r requirements.txt
 
 2. To use Spectrum, run the following command:
 
-`python spectrum.py --model-name <insert local or HF repo here> --top-percent <top % of snr ratios to target>`
+```
+python spectrum.py --model-name <insert local or HF repo here> --top-percent <top % of snr ratios to target>
+```
 
-In my case, it will be: `python spectrum.py --model-name meta-llama/Meta-Llama-3-8B-Instruct --top-percent 25`
+In my case, it will be: 
+```
+python spectrum.py --model-name meta-llama/Meta-Llama-3-8B-Instruct --top-percent 25
+```
 
 So, at this moment, you will have your **25%** target layers, on which you have to finetune your Model.
 
@@ -164,13 +170,13 @@ So, at this moment, you will have your **25%** target layers, on which you have 
 
 </details>
 
-Add your layer modules in your axolotl config file under `unfrozen_parameters` arg [see here](https://github.com/yuvrajsagar17/axolotl-finetune/blob/main/llama-3-8B-reasoning.yaml#L25)
+Add your layer modules in your axolotl config file under `unfrozen_parameters` arg. [see here](https://github.com/yuvrajsagar17/axolotl-finetune/blob/main/spectrum/Llama-3-8B-spectrum.yaml#L26)
 
 3. Get the axolotl yaml configuration file
 
 ```
 
-wget https://raw.githubusercontent.com/yuvrajsagar17/axolotl-finetune/refs/heads/main/llama-3-8B-reasoning.yaml
+wget https://raw.githubusercontent.com/yuvrajsagar17/axolotl-finetune/refs/heads/main/spectrum/Llama-3-8B-spectrum.yaml
 
 ```
 
@@ -178,7 +184,7 @@ wget https://raw.githubusercontent.com/yuvrajsagar17/axolotl-finetune/refs/heads
 
 ```
 
-accelerate launch scripts/finetune.py Llama-3-8B-spectrum.yamll
+accelerate launch scripts/finetune.py Llama-3-8B-spectrum.yaml
 
 ```
 
@@ -206,13 +212,13 @@ num_epochs: 2
 
 **Training/Loss Curve:**
 
-![Eval/Loss Image](spectrum/eval-loss.png)
+![Eval/Loss Image](eval-loss.png)
 
-![Train/Loss Image](spectrum/train-loss.png)
+![Train/Loss Image](train-loss.png)
 
 ### Merging Spectrum adapters
 
-After successfully completing the finetuning, the _spectrum adapter_ should already be uploaded to the Hugging Face Hub. In order to merge our base-model with these adapters, and pushing our merged model to HuggingFace, the steps are as:
+After successfully completing the finetuning, the _spectrum adapters_ should already be uploaded to the Hugging Face Hub. In order to merge our base-model with these adapters, and pushing our merged model to HuggingFace, the steps are as:
 
 1. Using this [script](https://gist.github.com/mlabonne/a3542b0519708b8871d0703c938bba9f) by `mlabonne`
 
@@ -235,3 +241,9 @@ Check out my Model [yuvraj17/Llama-3-8B-spectrum-25](https://huggingface.co/yuvr
 ### Next-up:
 
 - Quantize the Model (GGUF, GPTQ or AWQ) for local inference.
+
+--- 
+♥ Special Thanks to 
+- [Maximme labonne](https://github.com/mlabonne) for [`merge_peft`](https://gist.github.com/mlabonne/a3542b0519708b8871d0703c938bba9f) script
+- [Axolotl Team](https://github.com/axolotl-ai-cloud/axolotl) for such an easy-to-use tool for PEFT, and
+- [Stefano Fiorucci](https://huggingface.co/blog/anakin87/spectrum) for such an in-detailed blog for Spectrum Finetuning 
