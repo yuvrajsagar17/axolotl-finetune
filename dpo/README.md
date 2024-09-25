@@ -20,7 +20,7 @@ DPO is stable, performant, and computationally lightweight, eliminating the need
 
 > DPO is able to bypass both fitting an explicit reward and performing RL to learn the policy using a single maximum likelihood objective.
 
-- [📄 Direct Preference Optimization: Your Language Model is Secretly a Reward Model](https://arxiv.org/abs/2305.18290)
+For more details, Visit the official DPO Paper: [📄 Direct Preference Optimization: Your Language Model is Secretly a Reward Model](https://arxiv.org/abs/2305.18290)
 
 ## How DPO works
 
@@ -29,17 +29,17 @@ Fine-tuning a language model via DPO consists of two steps:
 - **Data collection**: Gather a preference dataset with positive and negative selected pairs of generation, given a prompt.
 - **Optimization**: Maximize the log-likelihood of the DPO loss directly.
 
-> DPO-compatible datasets can be found with the tag dpo on Hugging Face Hub. You can also explore the librarian-bots/direct-preference-optimization-datasets Collection to identify datasets that are likely to support DPO training.
+DPO-compatible datasets can be found with the tag `dpo` on Hugging Face Hub. You can also explore the librarian-bots/direct-preference-optimization-datasets Collection to identify datasets that are likely to support DPO training.
 
 ### Dataset Format
 
-Since the model will be trained to directly optimize the preference of which sentence is the most relevant, given two sentences, so considering this, following dataset format is required to finetune via DPO as:
+Since the model will be trained to directly optimize the preference of which sentence is the most relevant, given two sentences, so considering this, following dataset format is required to finetune via DPO:
 
 ![DPO vs RLHF](DPO-Dataset-Format.png)
 
 These datasets always have at least three columns `prompt`, `chosen`, `rejected`
 
-> **NOTE**: You can always customize your prompt according to the dataset column (See [Llama3-8B-SuperNova-Spectrum-Hermes-DPO.ipynb])
+**NOTE**: You can always customize your prompt according to the dataset column (See [Llama3-8B-SuperNova-Spectrum-Hermes-DPO.ipynb](Llama3-8B-SuperNova-Spectrum-Hermes-DPO.ipynb))
 
 ## Setup
 
@@ -51,7 +51,7 @@ I have crafted 2K dataset sample named [yuvraj17/chatml-OpenHermes2.5-dpo-binari
 
 In this DPO experiment, I have used `Huggingface TRL's` **DPOTrainer** to DPO finetune my `DARE_TIES` merged Model [`yuvraj17/Llama3-8B-SuperNova-Spectrum-dare_ties`](https://huggingface.co/yuvraj17/Llama3-8B-SuperNova-Spectrum-dare_ties).
 
-> The setup incorporates **QLoRA** in `4-bit precision` with **`nf4` quantization** for making the training memory efficient, for 1 epoch.
+I have used **QLoRA** in `4-bit precision` with **`nf4` quantization** for making the training memory efficient, and trained the model for **1 epoch**.
 
 ### GPU Setup
 
@@ -68,11 +68,11 @@ I have performed this DPO fine-tuning on Rupod GPUs.
 
 ## Result
 
-- A DPO Tuned version of my `DARE_TIES` merged Model [`yuvraj17/Llama3-8B-SuperNova-Spectrum-dare_ties`](https://huggingface.co/yuvraj17/Llama3-8B-SuperNova-Spectrum-dare_ties)
+A DPO Tuned version of my `DARE_TIES` merged Model [`yuvraj17/Llama3-8B-SuperNova-Spectrum-dare_ties`](https://huggingface.co/yuvraj17/Llama3-8B-SuperNova-Spectrum-dare_ties)
 
 **[yuvraj17/Llama3-8B-SuperNova-Spectrum-Hermes-DPO](https://huggingface.co/yuvraj17/Llama3-8B-SuperNova-Spectrum-Hermes-DPO)**
 
-> Visit, Try-out & Drop your thoughts..
+**Visit, Try-out & Drop your thoughts..**
 
 ## Next-up:
 
