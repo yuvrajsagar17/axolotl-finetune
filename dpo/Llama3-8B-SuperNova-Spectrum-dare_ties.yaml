@@ -1,0 +1,76 @@
+base_model: yuvraj17/Llama3-8B-SuperNova-Spectrum-dare_ties
+model_type: LlamaForCausalLM
+tokenizer_type: AutoTokenizer
+tokenizer_use_fast: true
+is_llama_derived_model: true
+
+load_in_8bit: false
+load_in_4bit: true
+strict: false
+
+adapter: qlora
+lora_model_dir:
+lora_r: 32
+lora_alpha: 16
+lora_dropout: 0.05
+lora_target_linear: true
+lora_fan_in_fan_out:
+
+dpo_beta: 0.1
+rl: dpo
+
+chat_template: chatml
+datasets:
+  - path: yuvraj17/chatml-OpenHermes2.5-dpo-binarized-alpha-2k
+    split: train
+    type: chatml.intel
+
+dataset_prepared_path: last_run_prepared
+output_dir: ./outputs/Llama3-8B-SuperNova-Spectrum-dpo
+save_steps:
+
+
+wandb_project: Llama3-8B-SuperNova-Spectrum-dpo
+wandb_entity:
+wandb_watch:
+wandb_name:
+wandb_log_model:
+
+sequence_len: 2048
+sample_packing: false
+eval_sample_packing: false
+val_set_size: 0
+pad_to_sequence_len: true
+gradient_accumulation_steps: 8
+micro_batch_size: 4
+num_epochs: 1
+optimizer: paged_adamw_32bit
+weight_decay: 0.0
+learning_rate: 0.000002
+lr_scheduler: cosine
+train_on_inputs: false
+group_by_length: false
+bf16: false
+fp16: true
+tf32: false
+
+gradient_checkpointing: true
+gradient_checkpointing_kwargs:
+  use_reentrant: false
+flash_attention: true
+
+warmup_steps: 100
+eval_steps: 0.01
+save_strategy: epoch
+save_steps:
+debug:
+deepspeed:
+weight_decay: 0.1
+fsdp:
+fsdp_config:
+
+eval_steps:
+early_stopping_patience:
+logging_steps: 1
+special_tokens:
+  pad_token: "<|end_of_text|>"
