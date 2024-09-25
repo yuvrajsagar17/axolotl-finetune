@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This repository contains my work on experimentating with finetuning LLMs using the [Axolotl](https://github.com/axolotl-ai-cloud/axolotl). My work focuses on exploring various finetuning techniques, model performance, and dataset customizations for specific tasks.
+This repository contains my work on experimentating with finetuning LLMs using the [Axolotl](https://github.com/axolotl-ai-cloud/axolotl) and [HuggingFace TRL]((https://huggingface.co/docs/trl/index)). My work focuses on exploring various finetuning techniques, model performance, and dataset customizations for specific tasks. 
 
 ## Overview
 
